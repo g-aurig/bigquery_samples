@@ -1,0 +1,16 @@
+SELECT
+    items.promotion_name AS item_promotion_name,
+    CONCAT(user_pseudo_id, (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id')) AS session_id,
+    COUNTIF(event_name = 'purchase') AS sessions
+FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`,
+    UNNEST(items) AS items
+WHERE
+    event_name = 'purchase'
+GROUP BY
+    item_promotion_name,
+    session_id
+HAVING 
+    sessions > 0
+ORDER BY
+    sessions DESC;
