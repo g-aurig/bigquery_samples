@@ -1,0 +1,27 @@
+WITH prep AS (
+-- prep table listing viewed pages together with the user and session details
+SELECT
+user_pseudo_id,
+-- Extracting the promotion_name from event_params where event_name is 'page_view' and key is 'promotion_name'
+(SELECT value.string_value FROM UNNEST(event_params) WHERE event_name = 'page_view' AND key = 'promotion_name') AS promotion_name,
+-- Extracting the session_id from event_params where event_name is 'page_view' and key is 'ga_session_id'
+(SELECT value.int_value FROM UNNEST(event_params) WHERE event_name = 'page_view' AND key = 'ga_session_id') AS session_id,
+-- Extracting the page_location from event_params where event_name is 'page_view' and key is 'page_location'
+(SELECT value.string_value FROM UNNEST(event_params) WHERE event_name = 'page_view' AND key = 'page_location') AS page_location,
+-- Determining if the session is an entrance session (landing page) by checking if the entrances key in event_params is equal to 1
+CASE WHEN (SELECT value.int_value FROM UNNEST(event_params) WHERE event_name = 'page_view' AND key = 'entrances') = 1 THEN true ELSE false END AS entrance_session
+FROM
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`
+WHERE
+event_name = 'page_view'
+)
+SELECT
+promotion_name,
+page_location,
+entrance_session
+FROM
+prep
+WHERE
+promotion_name IS NOT NULL
+ORDER BY
+page_location, promotion_name
