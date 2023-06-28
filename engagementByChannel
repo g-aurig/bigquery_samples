@@ -1,0 +1,22 @@
+WITH engagement_data AS (
+SELECT
+CONCAT(traffic_source.source, ' - ', traffic_source.medium) AS source_medium,
+user_pseudo_id,
+COUNT(DISTINCT CASE WHEN (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'session_engaged') = '1' THEN CONCAT(user_pseudo_id, (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id')) END) AS engaged_sessions,
+COUNT(DISTINCT CONCAT(user_pseudo_id, (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id'))) AS total_sessions
+FROM
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+WHERE
+event_name = 'page_view'
+GROUP BY
+source_medium, user_pseudo_id
+)
+SELECT
+source_medium,
+AVG(engaged_sessions / total_sessions) AS avg_engagement_rate
+FROM
+engagement_data
+GROUP BY
+source_medium
+ORDER BY
+avg_engagement_rate DESC
