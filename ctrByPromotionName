@@ -1,0 +1,45 @@
+WITH promotion_clicks AS (
+  SELECT
+    promotion_name,
+    COUNTIF(event_name = 'select_promotion') AS clicks
+  FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`,
+    UNNEST(items) AS items
+  WHERE
+    event_name = 'select_promotion'
+  GROUP BY
+    promotion_name
+),
+promotion_purchases AS (
+  SELECT
+    promotion_name,
+    COUNTIF(event_name = 'purchase') AS purchases
+  FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`,
+    UNNEST(items) AS items
+  WHERE
+    event_name = 'purchase'
+  GROUP BY
+    promotion_name
+),
+promotion_ctr AS (
+  SELECT
+    p.promotion_name,
+    p.clicks,
+    u.purchases,
+    SAFE_DIVIDE(u.purchases, p.clicks) AS ctr
+  FROM
+    promotion_clicks AS p
+  JOIN
+    promotion_purchases AS u
+  ON
+    p.promotion_name = u.promotion_name
+)
+SELECT
+  promotion_name,
+  clicks,
+  purchases,
+  ctr
+FROM
+  promotion_ctr
+  WHERE promotion_name <> 'Not available in demo dataset' and promotion_name <> '';
