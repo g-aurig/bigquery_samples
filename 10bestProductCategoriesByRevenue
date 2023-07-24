@@ -1,0 +1,13 @@
+select 
+item_category,
+sum(item_revenue) as total_revenue
+from 
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`,
+    unnest(items) as items
+where 
+    event_name = 'purchase'
+group by
+item_category
+order by
+total_revenue desc
+Limit 10
