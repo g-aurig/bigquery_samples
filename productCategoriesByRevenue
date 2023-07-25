@@ -1,13 +1,22 @@
+--column's name where to pull the data from
 select 
 item_category,
+--calculating the sum of all values in the item_revenue column
 sum(item_revenue) as total_revenue
+--table name where to pull the data from
 from 
-    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`,
-    unnest(items) as items
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`,
+--takes the items array field as input and flattens it so that the array elements will be separate rows in the query result
+unnest(items) as items
+--return row(s) that match the condition
 where 
-    event_name = 'purchase'
+event_name = 'purchase'
+--show distinct groups of data based on the column
 group by
 item_category
+--sort the results descending on the column
 order by
 total_revenue desc
+--limit the output to 10 rows
 Limit 10
+
