@@ -1,7 +1,7 @@
 # Overview
 **Screenshots show the BigQuery sample results with the "Why" and actionable insights**
 
-The screenshot shows the top 10 product categories by revenue ('productCategoriesByRevenue'-query) for the time period 01/11/2020-31/01/2021. 
+The screenshot shows the top 10 product categories by revenue ([productCategoriesByRevenue-query] (https://github.com/g-aurig/bigquery_samples/blob/main/productCategoriesByRevenue)) for the time period 01/11/2020-31/01/2021. 
 
 ![Screenshot 2023-07-25 at 10 06 24](https://github.com/g-aurig/bigquery_samples/assets/138019708/0a26d9aa-f8de-41ff-9bdc-1b69a6cb5ac1)
 
