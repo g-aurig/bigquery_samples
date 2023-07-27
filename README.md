@@ -1,5 +1,5 @@
 # Overview
-**Screenshots show the BigQuery sample results with the "Why" behind the query and offer actionable insights**
+**The screenshots show the BigQuery sample results with the "Why" behind the respective query and offer actionable insights. The data comes from the Google Merchandise GA4 obfuscated sample ecommerce dataset.**
 
 The screenshot shows the top 10 [product categories by revenue](https://github.com/g-aurig/bigquery_samples/blob/main/productCategoriesByRevenue) for the time period 01/11/2020-31/01/2021. 
 
