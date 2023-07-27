@@ -23,8 +23,8 @@ Let's consider 2 reasons to investigate the engagement rate by source/medium:
 1. Identify top performing channels: focus efforts & resources on the most effective channels, ultimately maximizing ROI,
 2. Understand user behaviour: higher engagement rates indicating visitors from these channels are more likely to be interested in the content/product.
 
-- One insight is that the data quality needs a thourough investigation since engagement rates of 1.0 are highly unlikely.
-- Another insight is that the spread of the remaining channels is rather small,i.e. 0.61 to 0.73. Despite users coming from quite different channels the overall engagement rate is high.
+- An insight is that the data quality needs a thourough investigation since engagement rates of 1.0 are highly unlikely.
+- Another insight is that the spread of the remaining channels is rather small,i.e. 0.61 to 0.73. Despite users coming from quite different channels the overall engagement rate is high. A further in-depth comparison of customer acquisition cost per channel provides further knowledge on how to invest available resources most efficiently. 
 ---
 
 
