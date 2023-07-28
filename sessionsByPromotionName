@@ -1,16 +1,24 @@
+--selects item_promotion_name & counts the number of sessions per item_promotion_name
 SELECT
-    items.promotion_name AS item_promotion_name,
-    CONCAT(user_pseudo_id, (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id')) AS session_id,
-    COUNTIF(event_name = 'purchase') AS sessions
-FROM
-    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`,
-    UNNEST(items) AS items
-WHERE
-    event_name = 'purchase'
-GROUP BY
     item_promotion_name,
-    session_id
+    COUNT(DISTINCT session_id) AS sessions
+FROM (
+    --subquery to generate item_promotion_name & session_id for sessions with a purchase
+    SELECT
+        items.promotion_name AS item_promotion_name,
+        CONCAT(user_pseudo_id, (SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id')) AS session_id
+    FROM
+        `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events*`,
+        UNNEST(items) AS items
+    WHERE
+        event_name = 'purchase'
+      )
+--shows groups where each group is representing a unique combination of values from the column
+GROUP BY
+    item_promotion_name
+--filter for promotions that have more than 0 sessions
 HAVING 
     sessions > 0
+--count the results by the number of sessions in descending order
 ORDER BY
     sessions DESC;
