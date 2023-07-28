@@ -27,5 +27,11 @@ Let's consider 2 reasons to investigate the engagement rate by source/medium:
 - Another insight is that the spread of the remaining channels is rather small,i.e. 0.61 to 0.73. Despite users coming from quite different channels the overall engagement rate is high. A further in-depth comparison of customer acquisition cost per channel provides further knowledge on how to invest available resources most efficiently. 
 ---
 
+The screenshot shows the [number of sessions with a purchase per promotion group](https://github.com/g-aurig/bigquery_samples/blob/main/sessionsByPromotionName)
+
+![Screenshot 2023-07-28 at 11 49 24](https://github.com/g-aurig/bigquery_samples/assets/138019708/7b0152c4-1bcb-46d6-963a-67b9b3b26df8)
+
+
+
 
 
