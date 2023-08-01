@@ -1,3 +1,5 @@
+-- Creating a Common Table Expression (CTE) named promotion_clicks
+-- This CTE calculates the number of clicks for each promotion_name where the event_name is 'select_promotion'
 WITH promotion_clicks AS (
   SELECT
     promotion_name,
@@ -10,6 +12,8 @@ WITH promotion_clicks AS (
   GROUP BY
     promotion_name
 ),
+-- Creating another CTE named promotion_purchases
+-- This CTE calculates the number of purchases for each promotion_name where the event_name is 'purchase'
 promotion_purchases AS (
   SELECT
     promotion_name,
@@ -22,12 +26,14 @@ promotion_purchases AS (
   GROUP BY
     promotion_name
 ),
+-- Creating a third CTE named promotion_ctr
+-- This CTE combines the results from the previous CTEs (promotion_clicks and promotion_purchases) to calculate the click-through rate (CTR) for each promotion_name
 promotion_ctr AS (
   SELECT
     p.promotion_name,
     p.clicks,
     u.purchases,
-    SAFE_DIVIDE(u.purchases, p.clicks) AS ctr
+    round(SAFE_DIVIDE(u.purchases, p.clicks),2) AS ctr
   FROM
     promotion_clicks AS p
   JOIN
@@ -35,6 +41,9 @@ promotion_ctr AS (
   ON
     p.promotion_name = u.promotion_name
 )
+-- The final SELECT statement retrieves data from the promotion_ctr CTE
+-- It filters out the promotion_names with values 'Not available in demo dataset' and '' (empty string) to maintain a clean appearance
+-- Then, it orders the results by CTR in descending order
 SELECT
   promotion_name,
   clicks,
@@ -42,4 +51,7 @@ SELECT
   ctr
 FROM
   promotion_ctr
-  WHERE promotion_name <> 'Not available in demo dataset' and promotion_name <> '';
+  WHERE 
+  promotion_name <> 'Not available in demo dataset' and promotion_name <> ''
+  order by
+  ctr desc
