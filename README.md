@@ -37,9 +37,19 @@ Below are 3 reasons to be curious about the number of sessions by promotion name
 3. Seasonal & trend analysis: considering patterns over time enables better planning & preparedness for peak demand periods.
 
 - An initial observation is about data quality. The promotion name shows an empty cell in row 1 & (not set) in row 2. The priority would be to follow up on the tracking, e.g. issues with UTM-parameters.
-- The first glimpse shows that the promotion 'Reach New Heights' has driven the largest number of attributable sessions. But what about the CTR or the revenue connected to the promotion?
+- The first glimpse shows that the promotion 'Reach New Heights' has driven the largest number of attributable sessions. But what about the CTR or the revenue connected to the respective promotion?
 ---
 
+The screenshot shows the [CTR for each promotion name](https://github.com/g-aurig/bigquery_samples/blob/main/ctrByPromotionName).
 
+![Screenshot 2023-08-01 at 14 51 59](https://github.com/g-aurig/bigquery_samples/assets/138019708/170c16c0-fdf4-4bad-82ad-6a1769745ddb)
 
+Multiple reasons make us interested in looking at the CTR by promotion name:
+1. Promotion effectiveness: high CTR's indicate that a promotion is resonating with the audience and generates interest, while a low CTR may suggest that the promotion is not engaging enough,
+2. Improving conversion rates: high CTR's indicate that a significant number of users are clicking on the promotion, which positively impacted the conversion rates for a purchase,
+3. Identifying opportunities and challenges: CTR data can help identify opportunities for improvement and areas that need attention, e.g. promotions with a low CTR may signal a need to revise the content or targeting strategy.
 
+- The result shows that promotions for the 'Google Mural Collection' have the highest CTR, while 'Act Responsible' has the lowest CTR.
+- Based on the results, identify factors that contributed to the successful promotions and consider replicating those strategies in future campaigns.
+- At the same time, examine promotions with low CTR's to understand why they are not generating enough interest, with potential issues, such as unappealing content or a weak call-to-action (CTA), and devise strategies to improve them.
+---
